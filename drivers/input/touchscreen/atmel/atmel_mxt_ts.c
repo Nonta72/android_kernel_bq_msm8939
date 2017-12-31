@@ -2450,10 +2450,10 @@ static void mxt_proc_T93_messages(struct mxt_data *data, u8 *msg)
 
 	/* do not report events if input device not yet registered */
 	if (test_bit(MXT_WK_ENABLE,&data->enable_wakeup)) {
-#ifdef CONFIG_MXT_PROCI_PI_WORKAROUND
+/*#ifdef CONFIG_MXT_PROCI_PI_WORKAROUND
 		if (ltr559_get_ps_value_for_double_tap())
 			return;
-#endif
+#endif*/
 		ret = mxt_proc_gesture_messages(data, MXT_PROCI_TOUCHSEQUENCELOGGER_T93,
 			T93_KEY, msg);
 //		ret = mxt_proc_gesture_messages(data, MXT_PROCI_TOUCHSEQUENCELOGGER_T93,
@@ -6620,4 +6620,3 @@ module_exit(mxt_exit);
 MODULE_AUTHOR("Joonyoung Shim <jy0922.shim@samsung.com>");
 MODULE_DESCRIPTION("Atmel maXTouch Touchscreen driver");
 MODULE_LICENSE("GPL");
-
