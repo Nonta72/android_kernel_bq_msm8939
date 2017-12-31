@@ -162,10 +162,9 @@ static int create_fixed_stream_quirk(struct snd_usb_audio *chip,
 		goto error;
 	}
 	alts = &iface->altsetting[fp->altset_idx];
-	if (altsd->bNumEndpoints < 1) {
-		kfree(fp);
-		kfree(rate_table);
-		return -EINVAL;
+	if (get_iface_desc(alts)->bNumEndpoints < 1) {
+		err = -EINVAL;
+		goto error;
 	}
 
 	if (fp->datainterval == 0)
