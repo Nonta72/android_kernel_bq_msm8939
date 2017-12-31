@@ -496,7 +496,7 @@ static int ltr559_als_read(struct i2c_client *client)
 static void ltr559_ps_work_func(struct work_struct *work)
 {
 	struct ltr559_data *data = container_of(work, struct ltr559_data, ps_work.work);
-	struct i2c_client *client=data->client;
+	struct i2c_client *client = data->client;
 	int als_ps_status;
 	int psval_lo, psval_hi, psdata;
 	static u32 ps_state_last = 2;	//Far as default.
@@ -527,9 +527,9 @@ static void ltr559_ps_work_func(struct work_struct *work)
 				goto workout;
 		}
 		psdata = ((psval_hi & 7) << 8) | psval_lo;
-		printk("%s: psdata=%d(0x%x), near_thrd=%u, far_thrd=%u, dynamic_noise=%u\n",
+		printk("%s: psdata=%d(0x%x), near_thrd=%u, far_thrd=%u\n",
 			   __func__, psdata, (u32)psdata, data->platform_data->prox_threshold,
-			   data->platform_data->prox_hsyteresis_threshold, data->dynamic_noise);
+			   data->platform_data->prox_hsyteresis_threshold);
 
 		if(psdata >= data->platform_data->prox_threshold){			
 			data->ps_state = 0; //near
@@ -1146,7 +1146,7 @@ int ltr559_device_init(struct i2c_client *client)
 	return retval;
 }
 
-static int ltr559_read_ps_value_for_double_tap(void)
+/*static int ltr559_read_ps_value_for_double_tap(void)
 {
 	int psdata;
 
@@ -1191,7 +1191,7 @@ int ltr559_get_ps_value_for_double_tap(void)
 	else
 		return 0;
 }
-EXPORT_SYMBOL(ltr559_get_ps_value_for_double_tap);
+EXPORT_SYMBOL(ltr559_get_ps_value_for_double_tap);*/
 
 static int sensor_regulator_configure(struct ltr559_data *data, bool on)
 {
@@ -1721,4 +1721,3 @@ MODULE_AUTHOR("Lite-On Technology Corp.");
 MODULE_DESCRIPTION("Lite-On LTR-559 Proximity and Light Sensor Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION("1.0");
-
