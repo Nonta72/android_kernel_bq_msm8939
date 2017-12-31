@@ -61,6 +61,10 @@
 #include <asm/psci.h>
 #include <asm/efi.h>
 
+#ifdef CONFIG_INPUT_TOUCHSCREEN
+int is_tp_driver_loaded;
+#endif
+
 unsigned int processor_id;
 EXPORT_SYMBOL(processor_id);
 
